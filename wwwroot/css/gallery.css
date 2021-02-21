@@ -4,6 +4,8 @@
     position: relative;
     overflow: hidden;
     margin: 0 auto;
+
+    border: solid 0px red;
 }
 
 .button-wrapper {
@@ -13,6 +15,7 @@
     justify-content: space-between;
     align-items: center;
     position: absolute;
+    z-index: 0;
 }
 
 .carousel {
@@ -24,12 +27,29 @@
     position: absolute;
     left: 0;
     transition: all 1s ease;
+
+    /*margin-left: -200px;*/
+    border: solid 0px green;
 }
 
 .card {
-    background: black;
+    /*background: black;*/
     min-width: 200px;
     height: 200px;
     margin-right: 1rem;
     display: inline-block;
+    
+    border: solid 0px black;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.portrat {
+    height: auto;
+    min-height: 400px;
+    width: 630px;
+    position: relative;
+    /*overflow: hidden;*/
+    margin: 0 auto;
+    border: solid 1px black;
 }
