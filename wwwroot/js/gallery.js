@@ -1,12 +1,4 @@
 ﻿
-const dataUrl = "/images/GetRandomFive"
-const getNextFive = async function() {
-    const response = await fetch(dataUrl);
-    let data = await response.json();
-
-    return data;
-}
-
 const initGallery = function() {
     // Select the carousel you'll need to manipulate and the buttons you'll add events to
     const carousel = document.querySelector("[data-target='carousel']");
@@ -48,7 +40,13 @@ const initGallery = function() {
     })
 }
 
-initGallery();
+const dataUrl = "/images/GetRandomFive"
+const getNextFive = async function () {
+    const response = await fetch(dataUrl);
+    let data = await response.json();
+
+    return data;
+}
 
 const initThumbnails = async () => {
     const set = await getNextFive();
@@ -56,21 +54,29 @@ const initThumbnails = async () => {
     const carousel = document.querySelector("[data-target='carousel']");
     const cards = carousel.querySelectorAll("[data-target='card']");
     const portratImage = document.querySelector("[data-target='img']");
+    const authorStrip = document.querySelector("[data-target='author']");
 
     for (let i = 0; i < cards.length; i++) {
-        var img = document.createElement("img");
         const src = set[i].download_Url;
+        const author = set[i].author;
+
+        var img = document.createElement("img");
         img.src = src;
         img.width = 200;
         img.height = 200;
 
         img.addEventListener("click", function () {
             portratImage.src = src;
+            authorStrip.innerHTML = author;
         });
 
         var li = cards[i];
         li.appendChild(img);
+
+        i === 2 && img.click();
     }
 };
+
+initGallery();
 initThumbnails();
 
