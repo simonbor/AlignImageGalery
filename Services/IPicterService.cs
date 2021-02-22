@@ -7,6 +7,5 @@ namespace AlignImageGalery.Services
     interface IPicterService
     {
         Task<List<Image>> GetImages();
-        //Task<string> GetImages();
     }
 }

@@ -13,29 +13,29 @@ namespace AlignImageGalery.Controllers
     {
         private readonly IMemoryCache _cache;
         private const int IMAGES_SET_EXPIRATION = 600;
+        private PicsumService picsumService;
 
         public ImagesController(IMemoryCache memoryCache)
         {
             _cache = memoryCache;
+            picsumService = new PicsumService();
         }
 
         public async Task<JsonResult> GetRandomFive([FromQuery] int set)
         {
-            var picsum = new PicsumService();
-
             if (!_cache.TryGetValue("Images", out List<Image> images))
             {
-                images = await picsum.GetImages();
-                
-                // shuffle the images list
+                // get images json and shuffle the order
+                images = await picsumService.GetImages();
                 images = images.OrderBy(i => Guid.NewGuid()).ToList();
 
+                // cashe json
                 var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(IMAGES_SET_EXPIRATION));
                 _cache.Set("Images", images, cacheEntryOptions);
             }
 
+            // each time take new set of five by the set counter
             var setOfFive = images.Take(set * 5).Skip((set - 1) * 5);
-
             return Json(setOfFive);
         }
 
