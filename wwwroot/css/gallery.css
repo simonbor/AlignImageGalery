@@ -1,7 +1,6 @@
 ﻿.gallery {
     position: relative;
     display: block;
-    border: solid 0px green;
     height: 100%;
     width: 100%;
 }
@@ -11,8 +10,6 @@
     height: auto;
     margin: 0 auto;
     position: relative;
-
-    border: solid 0px black;
 }
 
 .buttons {
@@ -24,7 +21,6 @@
     position: absolute;
     top: 0;
     left: 0;
-
     z-index: 0;
 }
 
@@ -38,8 +34,6 @@
     position: relative;
     overflow: hidden;
     margin: 0 auto;
-
-    border: solid 0px red;
 }
 
 .carousel {
@@ -51,8 +45,6 @@
     position: absolute;
     left: 0;
     transition: all 1s ease;
-
-    border: solid 0px green;
 }
 
 .card {
@@ -60,8 +52,6 @@
     height: 200px;
     margin-right: 1rem;
     display: inline-block;
-    
-    border: solid 0px black;
     cursor: pointer;
     z-index: 50;
 }
@@ -72,8 +62,6 @@
     width: 690px;
     position: relative;
     margin: 0 auto;
-
-    border: solid 0px black;
 }
 
 .author {
@@ -85,8 +73,6 @@
     text-align: center;
     color: white;
     transition: .4s ease;
-
-    border: solid 0px black;
 }
 
 .portrat:hover .author {
