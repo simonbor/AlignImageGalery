@@ -40,12 +40,11 @@ const initGallery = function() {
     })
 }
 
+let setNum = 0;
 const dataUrl = "/images/GetRandomFive"
 const getNextFive = async function () {
-    const response = await fetch(dataUrl);
-    let data = await response.json();
-
-    return data;
+    const response = await fetch(dataUrl + `?set=${++setNum}`);
+    return await response.json();
 }
 
 const initThumbnails = async () => {
@@ -70,13 +69,23 @@ const initThumbnails = async () => {
             authorStrip.innerHTML = author;
         });
 
-        var li = cards[i];
-        li.appendChild(img);
+        cards[i].innerHTML = '';
+        cards[i].appendChild(img);
 
         i === 2 && img.click();
     }
 };
 
+const gallery = document.querySelector("[data-target='gallery']");
+let interval;
+const delay = 10;
+
+gallery.addEventListener('mousemove', e => {
+    clearInterval(interval);
+    interval = setInterval(initThumbnails, 1000 * delay);
+});
+
 initGallery();
 initThumbnails();
+interval = setInterval(initThumbnails, 1000 * delay);
 
