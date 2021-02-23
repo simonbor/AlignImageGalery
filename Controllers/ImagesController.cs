@@ -12,7 +12,7 @@ namespace AlignImageGalery.Controllers
     public class ImagesController : Controller
     {
         private readonly IMemoryCache _cache;
-        private const int IMAGES_SET_EXPIRATION = 600;
+        private const int IMAGES_SET_EXPIRATION = 10;
         private IPicterService pictureService;
 
         public ImagesController(IMemoryCache memoryCache)
@@ -30,7 +30,7 @@ namespace AlignImageGalery.Controllers
                 images = images.OrderBy(i => Guid.NewGuid()).ToList();
 
                 // cashe json
-                var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(IMAGES_SET_EXPIRATION));
+                var cacheEntryOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(IMAGES_SET_EXPIRATION));
                 _cache.Set("Images", images, cacheEntryOptions);
             }
 
