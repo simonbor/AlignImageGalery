@@ -1,9 +1,12 @@
-﻿const imageGallery = function () {
+﻿
+// inspired by https://medium.com/@magyarn/simple-carousel-with-vanilla-js-3dd10a143ff2
+const imageGallery = function () {
     const carousel = document.querySelector("[data-target='carousel']");
     const dataUrl = "/images/GetRandomFive";
     let setNum = 0;
 
     const getNextFive = async function () {
+        setNum = setNum > 19 ? 0 : setNum;
         const response = await fetch(dataUrl + `?set=${++setNum}`);
         return await response.json();
     }
