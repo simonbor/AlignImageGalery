@@ -1,3 +1,4 @@
+using AlignImageGalery.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,8 @@ namespace AlignImageGalery
         {
             services.AddMemoryCache();
             services.AddControllersWithViews();
+
+            services.AddScoped(typeof(IPicterService), typeof(PicsumService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

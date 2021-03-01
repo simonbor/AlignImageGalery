@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace AlignImageGalery.Services
 {
-    interface IPicterService
+    public interface IPicterService
     {
         Task<List<Image>> GetImages();
     }

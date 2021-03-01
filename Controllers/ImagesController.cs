@@ -13,12 +13,12 @@ namespace AlignImageGalery.Controllers
     {
         private readonly IMemoryCache _cache;
         private const int IMAGES_SET_EXPIRATION = 10;
-        private IPicterService pictureService;
+        private readonly IPicterService _pictureService;
 
-        public ImagesController(IMemoryCache memoryCache)
+        public ImagesController(IMemoryCache memoryCache, IPicterService picterService)
         {
             _cache = memoryCache;
-            pictureService = new PicsumService();
+            _pictureService = picterService;
         }
 
         public async Task<JsonResult> GetRandomFive([FromQuery] int set)
@@ -26,7 +26,7 @@ namespace AlignImageGalery.Controllers
             if (!_cache.TryGetValue("Images", out List<Image> images))
             {
                 // get images json and shuffle the order
-                images = await pictureService.GetImages();
+                images = await _pictureService.GetImages();
                 images = images.OrderBy(i => Guid.NewGuid()).ToList();
 
                 // cashe json
